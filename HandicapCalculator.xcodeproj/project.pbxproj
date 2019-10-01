@@ -13,6 +13,7 @@
 		E40287DD2341428A00879526 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E40287DC2341428A00879526 /* Assets.xcassets */; };
 		E40287E02341428A00879526 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E40287DE2341428A00879526 /* LaunchScreen.storyboard */; };
 		E40287EB2341428B00879526 /* HandicapCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40287EA2341428B00879526 /* HandicapCalculatorTests.swift */; };
+		E478822623414C700054A436 /* HandicapCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E478822523414C700054A436 /* HandicapCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		E40287E62341428B00879526 /* HandicapCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HandicapCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40287EA2341428B00879526 /* HandicapCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandicapCalculatorTests.swift; sourceTree = "<group>"; };
 		E40287EC2341428B00879526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E478822523414C700054A436 /* HandicapCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandicapCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				E40287DC2341428A00879526 /* Assets.xcassets */,
 				E40287DE2341428A00879526 /* LaunchScreen.storyboard */,
 				E40287E12341428A00879526 /* Info.plist */,
+				E478822523414C700054A436 /* HandicapCalculator.swift */,
 			);
 			path = HandicapCalculator;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			files = (
 				E40287D82341428900879526 /* ViewController.swift in Sources */,
 				E40287D62341428900879526 /* AppDelegate.swift in Sources */,
+				E478822623414C700054A436 /* HandicapCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
