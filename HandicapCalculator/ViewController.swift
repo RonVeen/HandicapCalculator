@@ -13,17 +13,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentHandicap: UITextField!
     @IBOutlet weak var stablefordPoints: UITextField!
     
+    @IBOutlet weak var nineOrEighteen: UISegmentedControl!
+    
     @IBOutlet weak var newHandicap: UILabel!
     
     @IBAction func calculateNewHandicapClicked(_ sender: Any) {
         let currentHandicapValue: Double? = Double(currentHandicap.text!)
         let stablefordPointsValue: Int? = Int(stablefordPoints.text!)
         let calculator = HandicapCalculator()
-        let calculatedNewHandicap = calculator.calculate(currentHandicap: currentHandicapValue!, stablefordPoints: stablefordPointsValue!)
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 1
-        formatter.maximumFractionDigits = 1
-        newHandicap.text = formatter.string(from: NSNumber(value: calculatedNewHandicap))
+        do {
+            let calculatedNewHandicap = try calculator.calculate(currentHandicap: currentHandicapValue!,
+                                                                 stablefordPoints: stablefordPointsValue!,
+                                                                 half: (nineOrEighteen.selectedSegmentIndex == 1))
+            let formatter = NumberFormatter()
+            formatter.minimumFractionDigits = 1
+            formatter.maximumFractionDigits = 1
+            newHandicap.text = formatter.string(from: NSNumber(value: calculatedNewHandicap))
+        } catch {
+            newHandicap.text = "9 hole qualifying not allowed"
+        }
     }
     
     override func viewDidLoad() {

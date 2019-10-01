@@ -9,13 +9,22 @@
 import Foundation
 
 class HandicapCalculator {
+    enum HandicapError: Error {
+        case CannotPlayQualifying9Holes
+    }
     
-    func calculate(currentHandicap: Double, stablefordPoints: Int) -> Double {
+    func calculate(currentHandicap: Double, stablefordPoints: Int, half: Bool) throws -> Double {
         let playCategory = self.determineCatetoryForPlayer(currentHandicap)
-        if (isWithinBuffer(playCategory, stablefordPoints)) {
+        
+        if (playCategory.number == 1 && half) {
+            throw HandicapError.CannotPlayQualifying9Holes
+        }
+        
+        let actualStablefordPoints = half ? stablefordPoints + 18 : stablefordPoints
+        if (isWithinBuffer(playCategory, actualStablefordPoints, half)) {
             return currentHandicap
         }
-        let difference = stablefordPoints - 36
+        let difference = actualStablefordPoints - 36
         var newHandicap = 0.0
         if (difference < 0) {
             newHandicap = increaseHandicap(currentHandicap, score: abs(difference), playCategory)
@@ -31,8 +40,12 @@ class HandicapCalculator {
         return category!
     }
     
-    internal func isWithinBuffer(_ category: Category, _ stablefordPoints: Int) -> Bool {
-        return stablefordPoints >= category.buffer.low && stablefordPoints <= category.buffer.high
+    internal func isWithinBuffer(_ category: Category, _ stablefordPoints: Int, _ half: Bool) -> Bool {
+        if (half) {
+            return stablefordPoints >= category.buffer9.low && stablefordPoints <= category.buffer9.high
+        } else {
+            return stablefordPoints >= category.buffer.low && stablefordPoints <= category.buffer.high
+        }
     }
 
     internal func increaseHandicap(_ current: Double, score difference: Int, _ category: Category) -> Double {
@@ -53,12 +66,12 @@ class HandicapCalculator {
 }
 
 fileprivate let categories: [Category] = [
-    Category(number: 1, low: 0.0,  high: 4.4,  increment: 0.1, decrement: 0.1, buffer: Buffer(low: 35, high: 36)),
-    Category(number: 2, low: 4.5,  high: 11.4, increment: 0.1, decrement: 0.2, buffer: Buffer(low: 34, high: 36)),
-    Category(number: 3, low: 11.5, high: 18.4, increment: 0.1, decrement: 0.3, buffer: Buffer(low: 33, high: 36)),
-    Category(number: 4, low: 18.5, high: 26.4, increment: 0.1, decrement: 0.4, buffer: Buffer(low: 32, high: 36)),
-    Category(number: 5, low: 26.5, high: 36.0, increment: 0.1, decrement: 0.5, buffer: Buffer(low: 31, high: 36)),
-    Category(number: 6, low: 36.0, high: 54.0, increment: 0.0, decrement: 1.0, buffer: Buffer(low:  0, high:  0))
+    Category(number: 1, low: 0.0,  high: 4.4,  increment: 0.1, decrement: 0.1, buffer: Buffer(low: 35, high: 36), buffer9: Buffer(low:  0, high:  0)),
+    Category(number: 2, low: 4.5,  high: 11.4, increment: 0.1, decrement: 0.2, buffer: Buffer(low: 34, high: 36), buffer9: Buffer(low: 35, high: 36)),
+    Category(number: 3, low: 11.5, high: 18.4, increment: 0.1, decrement: 0.3, buffer: Buffer(low: 33, high: 36), buffer9: Buffer(low: 35, high: 36)),
+    Category(number: 4, low: 18.5, high: 26.4, increment: 0.1, decrement: 0.4, buffer: Buffer(low: 32, high: 36), buffer9: Buffer(low: 34, high: 36)),
+    Category(number: 5, low: 26.5, high: 36.0, increment: 0.1, decrement: 0.5, buffer: Buffer(low: 31, high: 36), buffer9: Buffer(low: 33, high: 36)),
+    Category(number: 6, low: 36.0, high: 54.0, increment: 0.0, decrement: 1.0, buffer: Buffer(low:  0, high:  0), buffer9: Buffer(low:  0, high:  0))
 ]
 
 
@@ -69,6 +82,7 @@ struct Category {
     let increment: Double
     let decrement: Double
     let buffer: Buffer
+    let buffer9: Buffer
 }
 
 struct Buffer {
