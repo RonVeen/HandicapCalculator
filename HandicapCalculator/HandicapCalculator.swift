@@ -9,9 +9,6 @@
 import Foundation
 
 class HandicapCalculator {
-    enum HandicapError: Error {
-        case CannotPlayQualifying9Holes
-    }
     
     func calculate(currentHandicap: Double, stablefordPoints: Int, half: Bool) throws -> Double {
         let playCategory = self.determineCatetoryForPlayer(currentHandicap)
@@ -89,6 +86,11 @@ struct Buffer {
     let low: Int;
     let high: Int;
 }
+
+enum HandicapError: Error {
+    case CannotPlayQualifying9Holes
+}
+
 
 
 
