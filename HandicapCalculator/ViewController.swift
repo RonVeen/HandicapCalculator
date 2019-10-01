@@ -36,8 +36,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentHandicap.text = "36"
-        stablefordPoints.text = "0"
+        currentHandicap.text = ""
+        stablefordPoints.text = ""
+        newHandicap.text = ""
     }
 
 
