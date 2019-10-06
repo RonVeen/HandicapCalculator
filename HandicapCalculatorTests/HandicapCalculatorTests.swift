@@ -24,14 +24,10 @@ class HandicapCalculatorTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        calculator.calculate(currentHandicap: 0.0, stablefordPoints: 0)
+         XCTAssertEqual(try calculator.calculate(currentHandicap: 40.0, stablefordPoints: 20, half: false), 40.0)
+        
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    
 
 }
